@@ -6,9 +6,9 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
-		$("button").on("click",function(){
-			return false;
-		});
+		// $("button").on("click",function(){
+		// 	return false;
+		// });
 		$(".edit").on("click",function(){
 			// event.preventdefault();
 			// if ($(this).parent().siblings('.input1').is(':hidden')==false)
@@ -20,10 +20,6 @@
 			$(this).parent().siblings('.input1').toggle(function(){
 				if ($(this).parent().children(".input1").is(':hidden'))
 				{
-					// alert('yes');
-					console.log($(this).parent().children("button").children().attr("href"));
-					console.log($(this).parent().children(".checkbox").attr('rid'));
-					console.log($(this).parent().children(".input1").val());
 					$.post(
 						$(this).parent().children("button").children().attr("href"),
 						{id:$(this).parent().children(".checkbox").attr('rid'),name:$(this).parent().children(".input1").val()},
@@ -32,7 +28,6 @@
 							$("#status1").attr("status","yes");
 						},"json");
 
-				$(this).parent().children()	
 				};
 			});
 			if($(this).parent().siblings('.input1').val()!="") 
@@ -67,6 +62,32 @@
 					});
 				
 			};
+	});
+	$(document).on("click",".edit",function(){
+		$(this).parent().siblings('.checkbox,span').toggle();
+			$(this).parent().siblings('.input1').toggle(function(){
+				if ($(this).parent().children(".input1").is(':hidden'))
+				{
+					
+					$.post(
+						$(this).parent().children("button").children().attr("href"),
+						{id:$(this).parent().children(".checkbox").attr('rid'),name:$(this).parent().children(".input1").val()},
+						function(){
+							// alert('succeed!');
+							$("#status1").attr("status","yes");
+						},"json");
+
+				};
+			});
+			if($(this).parent().siblings('.input1').val()!="") 
+			{
+				// alert('no');
+				$(this).parent().siblings('span').html("<span>"+$(this).parent().siblings('.input1').val()+"</span>");
+			};
+			return false;
+	})
+	$(document).on("click","button",function(){
+		return false;
 	})
 	</script>
 </head>
